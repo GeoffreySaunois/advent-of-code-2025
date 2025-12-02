@@ -1,52 +1,55 @@
-day = "Day 1"
+day = "Day 2"
 
 test_path = f"inputs/{day}/test.txt"
 val_path = f"inputs/{day}/val.txt"
 
 
-def first_problem(rotations):
-    position = 50
+def first_invalid_half(start_range: int) -> int:
+    range_str = str(start_range)
+    n = len(range_str)
+    if n % 2 != 0:
+        return 10 ** (n // 2)
+
+    first_half = int(range_str[: n // 2])
+    second_half = int(range_str[n // 2 :])
+    if first_half < second_half:
+        return first_half + 1
+    else:
+        return first_half
+
+
+def double_number(n: int) -> int:
+    return int(str(n) * 2)
+
+
+def first_problem(id_ranges: list[list[int]]) -> int:
     ans = 0
-    for r in rotations:
-        value = int(r[1:])
-        if r[0] == "L":
-            position -= value
-        else:
-            position += value
-        position %= 100
-        if position == 0:
-            ans += 1
+    for id_range in id_ranges:
+        curr = first_invalid_half(id_range[0])
+        while double_number(curr) <= id_range[1]:
+            # print(f"Adding double number {double_number(curr)}")
+            ans += double_number(curr)
+            curr += 1
     return ans
 
 
-def second_problem(rotations):
-    position = 50
-    ans = 0
-    for r in rotations:
-        value = int(r[1:])
-
-        ans += value // 100
-        value %= 100
-
-        new_position = position
-        if r[0] == "L":
-            new_position -= value
-        else:
-            new_position += value
-
-        if (position > 0 and new_position <= 0) or new_position >= 100:
-            ans += 1
-        position = new_position % 100
-    return ans
+def second_problem(id_ranges):
+    return 0
 
 
 def parse_input(path):
     with open(path) as f:
-        lines = list(map(lambda line_: line_.strip(), f.readlines()))
+        lines = []
+        for id_range in f.readline().split(","):
+            lines.append(list(map(int, id_range.strip().split("-"))))
     return lines
 
 
 if __name__ == "__main__":
+
+    # print("test input:", parse_input(test_path))
+    # print("val input:", parse_input(val_path))
+
     lines = parse_input(test_path)
     print("First problem:", first_problem(lines))
     print("Second problem:", second_problem(lines))
