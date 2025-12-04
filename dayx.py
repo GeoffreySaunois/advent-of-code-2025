@@ -21,10 +21,8 @@ def parse_input(path):
 
 
 if __name__ == "__main__":
-    print(f"{day} answers:")
-
-    # print("test input:", parse_input(test_path))
-    # print("val input:", parse_input(val_path))
+    print(f"{day}:")
+    print("Test input:", parse_input(test_path))
 
     test = parse_input(test_path)
     val = parse_input(val_path)
