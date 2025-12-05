@@ -4,11 +4,11 @@ test_path = f"inputs/{day}/test.txt"
 val_path = f"inputs/{day}/val.txt"
 
 
-def first_problem(id_ranges: list[list[int]]) -> int:
+def first_problem(input: list[list], verbose=False) -> int:
     return 0
 
 
-def second_problem(id_ranges, verbose=False) -> int:
+def second_problem(input: list[int], verbose=False) -> int:
     return 0
 
 
@@ -22,7 +22,7 @@ def parse_input(path):
 
 if __name__ == "__main__":
     print(f"{day}:")
-    print("Test input:", parse_input(test_path))
+    print("Test input:", *parse_input(test_path), sep="\n")
 
     test = parse_input(test_path)
     val = parse_input(val_path)
