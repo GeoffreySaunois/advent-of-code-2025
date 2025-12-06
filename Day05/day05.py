@@ -1,7 +1,10 @@
-day = "Day 5"
+from pathlib import Path
 
-test_path = f"inputs/{day}/test.txt"
-val_path = f"inputs/{day}/val.txt"
+BASE_DIR = Path(__file__).resolve().parent
+DAY = BASE_DIR.name
+
+test_path = BASE_DIR / "test"
+val_path = BASE_DIR / "input"
 
 
 def first_problem(input: list[list], verbose=False) -> int:
@@ -31,6 +34,11 @@ def first_problem(input: list[list], verbose=False) -> int:
     return fresh
 
 
+def test_first_problem():
+    test_input = parse_input(test_path)
+    assert first_problem(test_input, verbose=True) == 3
+
+
 def second_problem(input: list[int], verbose=False) -> int:
     ranges, _ = input
     ranges = sorted(ranges, key=lambda x: (x[0], x[1]))
@@ -54,6 +62,11 @@ def second_problem(input: list[int], verbose=False) -> int:
     return fresh
 
 
+def test_second_problem():
+    test_input = parse_input(test_path)
+    assert second_problem(test_input, verbose=True) == 14
+
+
 def parse_input(path):
     with open(path) as f:
         ranges = []
@@ -70,8 +83,8 @@ def parse_input(path):
         return (ranges, ingredients)
 
 
-if __name__ == "__main__":
-    print(f"{day}:")
+def main():
+    print(f"{DAY}:")
     print("Test input:", *parse_input(test_path), sep="\n")
 
     test = parse_input(test_path)
@@ -86,3 +99,7 @@ if __name__ == "__main__":
         second_problem(([(10, 50), (20, 25)], 42), verbose=True),
     )
     print("Second problem val:", second_problem(val))
+
+
+if __name__ == "__main__":
+    main()

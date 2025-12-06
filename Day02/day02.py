@@ -1,7 +1,18 @@
-day = "Day 2"
+from pathlib import Path
 
-test_path = f"inputs/{day}/test.txt"
-val_path = f"inputs/{day}/val.txt"
+BASE_DIR = Path(__file__).resolve().parent
+DAY = BASE_DIR.name
+
+test_path = BASE_DIR / "test"
+val_path = BASE_DIR / "input"
+
+
+def parse_input(path):
+    with open(path) as f:
+        lines = []
+        for id_range in f.readline().split(","):
+            lines.append(list(map(int, id_range.strip().split("-"))))
+    return lines
 
 
 def first_invalid_half(start_range: int) -> int:
@@ -22,7 +33,7 @@ def double_number(n: int) -> int:
     return int(str(n) * 2)
 
 
-def first_problem(id_ranges: list[list[int]]) -> int:
+def first_problem(id_ranges: list[int], verbose=False) -> int:
     ans = 0
     for id_range in id_ranges:
         curr = first_invalid_half(id_range[0])
@@ -32,7 +43,7 @@ def first_problem(id_ranges: list[list[int]]) -> int:
     return ans
 
 
-def second_problem(id_ranges, verbose=False) -> int:
+def second_problem(id_ranges: list[int], verbose=False) -> int:
     ans = 0
     for a, b in id_ranges:
         ans += sum_multiple_numbers(a, b, verbose=verbose)
@@ -73,25 +84,24 @@ def is_nth_number(n: int, mask: int) -> bool:
     return True
 
 
-def parse_input(path):
-    with open(path) as f:
-        lines = []
-        for id_range in f.readline().split(","):
-            lines.append(list(map(int, id_range.strip().split("-"))))
-    return lines
+def test_parse_input():
+    test_input = parse_input(test_path)
+    assert test_input[0] == [11, 22]
+
+
+def test_first_problem():
+    test_input = parse_input(test_path)
+    assert first_problem(test_input, verbose=True) == 1227775554
+
+
+def test_second_problem():
+    test_input = parse_input(test_path)
+    assert second_problem(test_input, verbose=True) == 4174379265
 
 
 if __name__ == "__main__":
-    print(f"{day} answers:")
+    print(f"{DAY}:")
 
-    # print("test input:", parse_input(test_path))
-    # print("val input:", parse_input(val_path))
-
-    test = parse_input(test_path)
     val = parse_input(val_path)
-
-    print("First problem test :", first_problem(test))
     print("First problem val:", first_problem(val))
-
-    print("Second problem test:", second_problem(test, verbose=True))
     print("Second problem val:", second_problem(val))

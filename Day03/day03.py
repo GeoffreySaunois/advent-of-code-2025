@@ -1,7 +1,17 @@
-day = "Day 3"
+from pathlib import Path
 
-test_path = f"inputs/{day}/test.txt"
-val_path = f"inputs/{day}/val.txt"
+BASE_DIR = Path(__file__).resolve().parent
+DAY = BASE_DIR.name
+
+test_path = BASE_DIR / "test"
+val_path = BASE_DIR / "input"
+
+
+def parse_input(path) -> list[list[int]]:
+    with open(path) as f:
+        return list(
+            map(lambda line: list(map(int, line)), map(str.strip, f.readlines()))
+        )
 
 
 def first_problem(batteries: list[list[int]], verbose=False) -> int:
@@ -48,23 +58,24 @@ def solve_battery(battery: list[int], verbose=False) -> int:
     return dp[0]
 
 
-def parse_input(path) -> list[list[int]]:
-    with open(path) as f:
-        return list(
-            map(lambda line: list(map(int, line)), map(str.strip, f.readlines()))
-        )
+def test_parse_input():
+    test_input = parse_input(test_path)
+    assert test_input[0] == [9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1]
+
+
+def test_first_problem():
+    test_input = parse_input(test_path)
+    assert first_problem(test_input, verbose=True) == 357
+
+
+def test_second_problem():
+    test_input = parse_input(test_path)
+    assert second_problem(test_input, verbose=True) == 3121910778619
 
 
 if __name__ == "__main__":
-    print(f"{day}:")
-    # print("Test input:", parse_input(test_path))
+    print(f"{DAY}:")
 
-    test = parse_input(test_path)
     val = parse_input(val_path)
-
-    # print("First problem test :", first_problem(test, verbose=True))
-    # print("First problem val:", first_problem(val))
-
-    # solve_battery([9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1], verbose=True)
-    print("Second problem test:", second_problem(test, verbose=True))
+    print("First problem val:", first_problem(val))
     print("Second problem val:", second_problem(val))
