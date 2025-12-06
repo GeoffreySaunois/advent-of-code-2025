@@ -16,7 +16,7 @@ TEMPLATE = REPO_ROOT / "template.py"
 def setup(
     day: int = typer.Option(..., "--day", "-d", help="Day number to scaffold"),
 ) -> None:
-    """Scaffold a new day folder, copy template, and download inputs."""
+    """Creates a new day folder, copy template, and download inputs."""
     day_str = f"{day:02d}"
     day_dir = REPO_ROOT / f"Day{day_str}"
 
@@ -41,10 +41,6 @@ def setup(
                 "aoc",
                 "download",
                 f"--day={day}",
-                "--input-file",
-                "input",
-                "--puzzle-file",
-                "puzzle.md",
             ],
             check=True,
             cwd=day_dir,
