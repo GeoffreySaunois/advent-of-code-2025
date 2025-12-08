@@ -7,14 +7,14 @@ test_path = BASE_DIR / "test"
 val_path = BASE_DIR / "input"
 
 
-def parse_input(path) -> list[list[int]]:
+def parse_input(path: Path) -> list[list[int]]:
     with open(path) as f:
         return list(
             map(lambda line: list(map(int, line)), map(str.strip, f.readlines()))
         )
 
 
-def first_problem(batteries: list[list[int]], verbose=False) -> int:
+def first_problem(batteries: list[list[int]], verbose: bool = False) -> int:
     n = len(batteries[0])
     ans = 0
     for battery in batteries:
@@ -33,14 +33,14 @@ def first_problem(batteries: list[list[int]], verbose=False) -> int:
     return ans
 
 
-def second_problem(batteries: list[list[int]], verbose=False) -> int:
+def second_problem(batteries: list[list[int]], verbose: bool = False) -> int:
     ans = 0
     for battery in batteries:
         ans += solve_battery(battery, verbose)
     return ans
 
 
-def solve_battery(battery: list[int], verbose=False) -> int:
+def solve_battery(battery: list[int], verbose: bool = False) -> int:
     n = len(battery)
     dp = [0] * (n + 1)
 

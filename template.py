@@ -7,16 +7,16 @@ test_path = BASE_DIR / "test"
 val_path = BASE_DIR / "input"
 
 
-def parse_input(path) -> list[int]:
+def parse_input(path: Path) -> list[str]:
     with open(path) as f:
         return list(map(lambda line_: line_.strip(), f.readlines()))
 
 
-def first_problem(input: list[int], verbose=False) -> int:
+def first_problem(input: list[str], verbose: bool = False) -> int:
     return 0
 
 
-def second_problem(input: list[int], verbose=False) -> int:
+def second_problem(input: list[str], verbose: bool = False) -> int:
     return 0
 
 

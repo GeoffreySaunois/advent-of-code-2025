@@ -14,7 +14,7 @@ class Operation(StrEnum):
     MUL = "*"
 
 
-def first_parse_input(path) -> tuple[list[list[int]], list[str]]:
+def first_parse_input(path: Path) -> tuple[list[list[int]], list[str]]:
     with open(path) as f:
         input = list(map(lambda line_: line_.strip(), f.readlines()))
     numbers = []
@@ -25,7 +25,9 @@ def first_parse_input(path) -> tuple[list[list[int]], list[str]]:
     return numbers, operators
 
 
-def first_problem(numbers: list[list[int]], operators: list[str], verbose=False) -> int:
+def first_problem(
+    numbers: list[list[int]], operators: list[str], verbose: bool = False
+) -> int:
     m = len(operators)
     n = len(numbers)
     total = 0
@@ -45,7 +47,7 @@ def first_problem(numbers: list[list[int]], operators: list[str], verbose=False)
     return total
 
 
-def second_parse_input(path) -> list[tuple[Operation, list[int]]]:
+def second_parse_input(path: Path) -> list[tuple[Operation, list[int]]]:
     # Use 🎄 to keep spaces
     with open(path) as f:
         grid = list(map(lambda line_: line_.replace(" ", "🎄").strip(), f.readlines()))
@@ -72,7 +74,9 @@ def second_parse_input(path) -> list[tuple[Operation, list[int]]]:
     return problems
 
 
-def second_problem(problems: list[tuple[Operation, list[int]]], verbose=False) -> int:
+def second_problem(
+    problems: list[tuple[Operation, list[int]]], verbose: bool = False
+) -> int:
     total = 0
     for op, numbers in problems:
         if op == Operation.ADD:

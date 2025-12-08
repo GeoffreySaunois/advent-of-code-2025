@@ -7,9 +7,9 @@ test_path = BASE_DIR / "test"
 val_path = BASE_DIR / "input"
 
 
-def parse_input(path):
+def parse_input(path: Path) -> list[list[int]]:
     with open(path) as f:
-        lines = []
+        lines: list[list[int]] = []
         for id_range in f.readline().split(","):
             lines.append(list(map(int, id_range.strip().split("-"))))
     return lines
@@ -33,7 +33,7 @@ def double_number(n: int) -> int:
     return int(str(n) * 2)
 
 
-def first_problem(id_ranges: list[int], verbose=False) -> int:
+def first_problem(id_ranges: list[list[int]], verbose: bool = False) -> int:
     ans = 0
     for id_range in id_ranges:
         curr = first_invalid_half(id_range[0])
@@ -43,14 +43,16 @@ def first_problem(id_ranges: list[int], verbose=False) -> int:
     return ans
 
 
-def second_problem(id_ranges: list[int], verbose=False) -> int:
+def second_problem(id_ranges: list[list[int]], verbose: bool = False) -> int:
     ans = 0
     for a, b in id_ranges:
         ans += sum_multiple_numbers(a, b, verbose=verbose)
     return ans
 
 
-def sum_multiple_numbers(start_range: int, end_range: int, verbose=False) -> int:
+def sum_multiple_numbers(
+    start_range: int, end_range: int, verbose: bool = False
+) -> int:
     count = 0
     for n in range(start_range, end_range + 1):
         if is_multiple_number(n):

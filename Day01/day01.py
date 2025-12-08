@@ -7,12 +7,12 @@ test_path = BASE_DIR / "test"
 val_path = BASE_DIR / "input"
 
 
-def parse_input(path) -> list[str]:
+def parse_input(path: Path) -> list[str]:
     with open(path) as f:
         return list(map(lambda line_: line_.strip(), f.readlines()))
 
 
-def first_problem(rotations: list[str], verbose=False) -> int:
+def first_problem(rotations: list[str], verbose: bool = False) -> int:
     position = 50
     ans = 0
     for r in rotations:
@@ -27,7 +27,7 @@ def first_problem(rotations: list[str], verbose=False) -> int:
     return ans
 
 
-def second_problem(rotations: list[str], verbose=False) -> int:
+def second_problem(rotations: list[str], verbose: bool = False) -> int:
     position = 50
     ans = 0
     for r in rotations:

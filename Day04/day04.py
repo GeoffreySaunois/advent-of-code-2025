@@ -9,7 +9,7 @@ val_path = BASE_DIR / "input"
 DIRECTIONS = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 
 
-def parse_input(path) -> list[list[bool]]:
+def parse_input(path: Path) -> list[list[bool]]:
     with open(path) as f:
         raw = list(
             map(
@@ -26,7 +26,7 @@ def parse_input(path) -> list[list[bool]]:
     return padded
 
 
-def count_neighbors(grid, i, j):
+def count_neighbors(grid: list[list[bool]], i: int, j: int) -> int:
     count = 0
     for di, dj in DIRECTIONS:
         if grid[i + di][j + dj]:
@@ -34,7 +34,7 @@ def count_neighbors(grid, i, j):
     return count
 
 
-def first_problem(grid: list[list[bool]], verbose=False) -> int:
+def first_problem(grid: list[list[bool]], verbose: bool = False) -> int:
     n = len(grid) - 2
 
     count = 0
@@ -45,11 +45,11 @@ def first_problem(grid: list[list[bool]], verbose=False) -> int:
     return count
 
 
-def second_problem(grid: list[list[bool]], verbose=False) -> int:
+def second_problem(grid: list[list[bool]], verbose: bool = False) -> int:
     n = len(grid) - 2
 
     count = 0
-    queue = []
+    queue: list[tuple[int, int]] = []
     for i in range(1, n + 1):
         for j in range(1, n + 1):
             if grid[i][j] and count_neighbors(grid, i, j) < 4:

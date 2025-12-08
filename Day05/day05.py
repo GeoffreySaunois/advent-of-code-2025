@@ -1,5 +1,7 @@
 from pathlib import Path
 
+InputType = tuple[list[tuple[int, int]], list[int]]
+
 BASE_DIR = Path(__file__).resolve().parent
 DAY = BASE_DIR.name
 
@@ -7,7 +9,7 @@ test_path = BASE_DIR / "test"
 val_path = BASE_DIR / "input"
 
 
-def first_problem(input: list[list], verbose=False) -> int:
+def first_problem(input: InputType, verbose: bool = False) -> int:
     ranges, ingredients = input
     ranges = sorted(ranges, key=lambda x: (x[0], x[1]))
     ingredients = sorted(ingredients)
@@ -39,7 +41,7 @@ def test_first_problem():
     assert first_problem(test_input, verbose=True) == 3
 
 
-def second_problem(input: list[int], verbose=False) -> int:
+def second_problem(input: InputType, verbose: bool = False) -> int:
     ranges, _ = input
     ranges = sorted(ranges, key=lambda x: (x[0], x[1]))
 
@@ -67,10 +69,10 @@ def test_second_problem():
     assert second_problem(test_input, verbose=True) == 14
 
 
-def parse_input(path):
+def parse_input(path: Path) -> InputType:
     with open(path) as f:
-        ranges = []
-        ingredients = []
+        ranges: list[tuple[int, int]] = []
+        ingredients: list[int] = []
         while True:
             line = f.readline().strip()
             if not line:
@@ -96,7 +98,7 @@ def main():
     print("Second problem test:", second_problem(test, verbose=True))
     print(
         "Second problem custom:",
-        second_problem(([(10, 50), (20, 25)], 42), verbose=True),
+        second_problem(([(10, 50), (20, 25)], [42]), verbose=True),
     )
     print("Second problem val:", second_problem(val))
 
