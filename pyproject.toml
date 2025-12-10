@@ -1,8 +1,10 @@
 [project]
 	dependencies = [
+		"pulp>=3.3.0",
 		"pytest>=9.0.1",
+		"sympy>=1.14.0",
 		"typer>=0.20.0",
-	]
+]
 	description = "Add your description here"
 	name = "adventofcode"
 	readme = "README.md"
